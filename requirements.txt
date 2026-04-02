@@ -1,0 +1,22 @@
+# Data Science & Visualization
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+joblib
+
+# Machine Learning Models
+lightgbm
+xgboost
+shap
+
+# Backend (FastAPI API)
+fastapi
+uvicorn
+pydantic
+python-dotenv
+
+# Frontend (Streamlit)
+streamlit
+requests
