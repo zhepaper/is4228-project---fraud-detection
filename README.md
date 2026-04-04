@@ -110,3 +110,22 @@ Contains serialized model files and preprocessing artifacts used directly by the
 - Add example request payloads for each dataset
 - Add unit tests for adapters and API routes
 - Add a short architecture diagram for the end-to-end scoring flow
+
+## HOW TO RUN
+
+Install dependencies
+
+```
+pip install -r requirements.txt
+```
+
+Open 2 Terminals
+(One for frontend, One for backend)
+
+```
+uvicorn backend.api.main:app --reload --port 8000
+```
+
+```
+streamlit run frontend/app.py
+```
