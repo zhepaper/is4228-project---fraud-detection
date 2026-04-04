@@ -30,6 +30,8 @@ class DecisionResult:
     risk_factors      : list         # human-readable explanation strings
     dataset           : str          # which pipeline produced this result
     threshold_used    : float
+    is_dynamic        : bool = False # Whether the threshold was adjusted
+    adjustment_reason : str = ""    # Why the threshold was adjusted
     model             : str = "LightGBM"
 
     def to_dict(self) -> dict:
@@ -41,6 +43,8 @@ class DecisionResult:
             "risk_factors"      : self.risk_factors,
             "dataset"           : self.dataset,
             "threshold_used"    : round(self.threshold_used, 4),
+            "is_dynamic"        : self.is_dynamic,
+            "adjustment_reason" : self.adjustment_reason,
             "model"             : self.model,
         }
 
@@ -49,34 +53,82 @@ class DecisionResult:
 # Core decision logic
 # ---------------------------------------------------------------------------
 
+class DynamicDecisionEngine:
+    """
+    Adjusts model thresholds in real-time based on transaction context.
+    
+    Sensitivity Multipliers:
+      - 0.7 to 0.9: Stricter (Threshold lowered, easier to BLOCK)
+      - 1.1 to 1.5: Lenient  (Threshold raised, harder to BLOCK)
+    """
+
+    @staticmethod
+    def get_dynamic_threshold(
+        base_threshold : float,
+        features       : dict,
+        dataset        : str = ""
+    ) -> tuple[float, str]:
+        """
+        Apply multipliers to the F1-baseline based on amount and risk indicators.
+        """
+        multiplier = 1.0
+        reasons    = []
+
+        # --- 1. Amount Sensitivity (Value at Risk) ---
+        # Different datasets use different column names for amount
+        amount = 0.0
+        if dataset == "paysim":
+            amount = float(features.get("amount", 0))
+        elif dataset == "baf":
+            amount = float(features.get("proposed_credit_limit", 0))
+        elif dataset == "ieee":
+            amount = float(features.get("TransactionAmt", 0))
+        elif dataset == "finbank":
+            amount = float(features.get("credit_limit_requested", 0))
+
+        if amount > 5000:
+            multiplier *= 0.85
+            reasons.append("High transaction value (>$5000) increased sensitivity")
+        elif amount < 50 and amount > 0:
+            multiplier *= 1.3
+            reasons.append("Micro-transaction (<$50) decreased sensitivity")
+
+        # --- 2. Risk Indicators (Expert Rules) ---
+        if features.get("foreign_request") == 1 or features.get("overseas_ip") == 1:
+            multiplier *= 0.9
+            reasons.append("Foreign IP request increased sensitivity")
+
+        if features.get("email_is_free") == 1 or features.get("free_email") == 1:
+            multiplier *= 0.95
+            reasons.append("Free email provider increased sensitivity")
+
+        final_threshold = base_threshold * multiplier
+        reason_str = "; ".join(reasons) if reasons else "Standard F1 baseline used"
+        
+        return final_threshold, reason_str
+
+
 def make_decision(
     fraud_probability : float,
     threshold         : float,
+    features          : dict = None,
     dataset           : str = "",
     risk_factors      : list = None,
     model             : str = "LightGBM",
 ) -> DecisionResult:
     """
-    Convert a fraud probability into a tiered decision.
-
-    Thresholds are relative to the optimal F1 threshold found during training:
-      - BLOCK  : prob >= threshold * 1.2  (high confidence)
-      - REVIEW : prob >= threshold * 0.6  (ambiguous zone)
-      - PASS   : prob <  threshold * 0.6  (low risk)
-
-    These multipliers can be tuned to balance precision vs recall
-    depending on the business cost of false positives vs false negatives.
-
-    Args:
-        fraud_probability : model output probability [0, 1]
-        threshold         : optimal F1 threshold from training
-        dataset           : dataset name for the response
-        risk_factors      : list of human-readable risk factor strings
-        model             : model name for the response
-
-    Returns:
-        DecisionResult with full decision context
+    Convert a fraud probability into a tiered decision with dynamic thresholding.
     """
+    is_dynamic = False
+    reason     = "Baseline threshold"
+    
+    # Calculate context-aware threshold if features are provided
+    if features:
+        threshold, reason = DynamicDecisionEngine.get_dynamic_threshold(
+            threshold, features, dataset
+        )
+        is_dynamic = True
+
     block_threshold  = threshold * 1.2
     review_threshold = threshold * 0.6
 
@@ -97,6 +149,8 @@ def make_decision(
         risk_factors      = risk_factors or [],
         dataset           = dataset,
         threshold_used    = threshold,
+        is_dynamic        = is_dynamic,
+        adjustment_reason = reason,
         model             = model,
     )
 

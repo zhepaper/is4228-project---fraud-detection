@@ -36,14 +36,6 @@ from backend.core.explain import generate_explanation
 
 MODELS_DIR = os.path.join(os.path.dirname(__file__), '..', 'models')
 
-# Fixed decision thresholds per dataset
-# (multiplier approach fails for PaySim where optimal threshold > 0.98)
-DECISION_THRESHOLDS = {
-    "paysim": {"block": 0.90, "review": 0.60},
-    "baf":    {"block": 0.92, "review": 0.70},
-    "ieee":   {"block": 0.60, "review": 0.35},
-}
-
 # ---------------------------------------------------------------------------
 # App initialisation
 # ---------------------------------------------------------------------------
@@ -118,6 +110,8 @@ class PredictResponse(BaseModel):
     dataset           : str
     model             : str
     shap_explanations : dict[str, float]
+    is_dynamic        : bool = False
+    adjustment_reason : str = ""
     explanation      : str = ""
     explanation_method : str = "template"
 
@@ -164,30 +158,38 @@ def _predict_paysim(features: dict) -> PredictResponse:
     X    = df[feature_cols].values
     prob = float(model.predict_proba(X)[0, 1])
 
-    # Decision using fixed thresholds
-    t = DECISION_THRESHOLDS["paysim"]
-    if prob >= t["block"]:
-        decision, risk_level = "block", "high"
-    elif prob >= t["review"]:
-        decision, risk_level = "review", "medium"
-    else:
-        decision, risk_level = "pass", "low"
-
-    # Risk factors from feature values (SHAP now available)
-    risk_factors = _simple_risk_factors_paysim(df)
+    # Decision using Dynamic Engine
+    # Note: PaySim optimal F1 threshold is very high (~0.98), 
+    # but we use 0.5 as the baseline for the multiplier engine
+    base_t = artifacts.get("threshold", 0.5)
     
     # Get all SHAP values
     explainer = store["explainer"]
     shap_vals = _get_shap_values(explainer, X, feature_cols)
+    
+    # Generate risk factors from SHAP (or fallback)
+    risk_factors = get_risk_factors(feature_cols, list(shap_vals.values()))
+
+    # Final tiered decision
+    result = make_decision(
+        fraud_probability = prob,
+        threshold         = base_t,
+        features          = features,
+        dataset           = "paysim",
+        risk_factors      = risk_factors,
+        model             = "XGBoost",
+    )
 
     return PredictResponse(
-        fraud_probability = round(prob, 4),
-        decision          = decision,
-        risk_level        = risk_level,
-        risk_factors      = risk_factors,
-        dataset           = "paysim",
-        model             = "XGBoost",
+        fraud_probability = result.fraud_probability,
+        decision          = result.decision,
+        risk_level        = result.risk_level,
+        risk_factors      = result.risk_factors,
+        dataset           = result.dataset,
+        model             = result.model,
         shap_explanations = shap_vals,
+        is_dynamic        = result.is_dynamic,
+        adjustment_reason = result.adjustment_reason,
     )
 
 
@@ -212,29 +214,36 @@ def _predict_baf(features: dict) -> PredictResponse:
     # Ensemble: average predictions from all 5 fold models
     prob = float(np.mean([m.predict_proba(X)[0, 1] for m in fold_models]))
 
-    # Decision using fixed thresholds
-    t = DECISION_THRESHOLDS["baf"]
-    if prob >= t["block"]:
-        decision, risk_level = "block", "high"
-    elif prob >= t["review"]:
-        decision, risk_level = "review", "medium"
-    else:
-        decision, risk_level = "pass", "low"
-
-    risk_factors = _simple_risk_factors_baf(df)
+    # Decision using Dynamic Engine
+    base_t = artifacts.get("threshold", 0.5)
 
     # Get average SHAP values across all 5 folds
     explainers = store["explainers"]
     shap_vals  = _get_shap_values(explainers, X, feature_cols)
+    
+    # Generate risk factors from SHAP (or fallback)
+    risk_factors = get_risk_factors(feature_cols, list(shap_vals.values()))
+
+    # Final tiered decision
+    result = make_decision(
+        fraud_probability = prob,
+        threshold         = base_t,
+        features          = features,
+        dataset           = "baf",
+        risk_factors      = risk_factors,
+        model             = "LightGBM (5-fold ensemble)",
+    )
 
     return PredictResponse(
-        fraud_probability = round(prob, 4),
-        decision          = decision,
-        risk_level        = risk_level,
-        risk_factors      = risk_factors,
-        dataset           = "baf",
-        model             = "LightGBM (5-fold ensemble)",
+        fraud_probability = result.fraud_probability,
+        decision          = result.decision,
+        risk_level        = result.risk_level,
+        risk_factors      = result.risk_factors,
+        dataset           = result.dataset,
+        model             = result.model,
         shap_explanations = shap_vals,
+        is_dynamic        = result.is_dynamic,
+        adjustment_reason = result.adjustment_reason,
     )
 
 
@@ -264,29 +273,36 @@ def _predict_ieee(features: dict) -> PredictResponse:
     # Ensemble: average predictions from all 5 fold models
     prob = float(np.mean([m.predict_proba(X)[0, 1] for m in fold_models]))
 
-    # Decision using fixed thresholds
-    t = DECISION_THRESHOLDS["ieee"]
-    if prob >= t["block"]:
-        decision, risk_level = "block", "high"
-    elif prob >= t["review"]:
-        decision, risk_level = "review", "medium"
-    else:
-        decision, risk_level = "pass", "low"
-
-    risk_factors = _simple_risk_factors_ieee(df)
+    # Decision using Dynamic Engine
+    base_t = artifacts.get("threshold", 0.5)
 
     # Get average SHAP values across all 5 folds
     explainers = store["explainers"]
     shap_vals  = _get_shap_values(explainers, X, feature_cols)
+    
+    # Generate risk factors from SHAP (or fallback)
+    risk_factors = get_risk_factors(feature_cols, list(shap_vals.values()))
+
+    # Final tiered decision
+    result = make_decision(
+        fraud_probability = prob,
+        threshold         = base_t,
+        features          = features,
+        dataset           = "ieee",
+        risk_factors      = risk_factors,
+        model             = "LightGBM (5-fold ensemble)",
+    )
 
     return PredictResponse(
-        fraud_probability = round(prob, 4),
-        decision          = decision,
-        risk_level        = risk_level,
-        risk_factors      = risk_factors,
-        dataset           = "ieee",
-        model             = "LightGBM (5-fold ensemble)",
+        fraud_probability = result.fraud_probability,
+        decision          = result.decision,
+        risk_level        = result.risk_level,
+        risk_factors      = result.risk_factors,
+        dataset           = result.dataset,
+        model             = result.model,
         shap_explanations = shap_vals,
+        is_dynamic        = result.is_dynamic,
+        adjustment_reason = result.adjustment_reason,
     )
 
 

@@ -19,6 +19,7 @@ LLM_MODEL = os.getenv("LLM_MODEL", "llama-3.3-70b-versatile")
 LLM_API_KEY = os.getenv("LLM_API_KEY", "")
 LLM_BASE_URL = os.getenv("LLM_BASE_URL", None)
 
+
 SYSTEM_PROMPT = """
 You are a fraud analysis assistant for a financial security system. 
 Your task is to explain why a transaction was scored as potentially fraudulent or legitimate.
