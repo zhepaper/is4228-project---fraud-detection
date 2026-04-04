@@ -28,6 +28,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
 
 from backend.core.decision import make_decision, get_risk_factors
 from backend.adapters import paysim_adapter, baf_adapter, ieee_adapter, finbank_adapter
+from backend.core.explain import generate_explanation
 
 # ---------------------------------------------------------------------------
 # Configuration
@@ -117,6 +118,8 @@ class PredictResponse(BaseModel):
     dataset           : str
     model             : str
     shap_explanations : dict[str, float]
+    explanation      : str = ""
+    explanation_method : str = "template"
 
 # ---------------------------------------------------------------------------
 # Prediction helpers
@@ -390,12 +393,29 @@ def predict(dataset_type: str, request: PredictRequest):
             renamed = finbank_adapter.preprocess(pd.DataFrame([request.features])).iloc[0].to_dict()
             result  = _predict_baf(renamed)
             result.dataset = "finbank (routed → BAF)"
-            return result
         elif dataset_type == "paysim":
-            return _predict_paysim(request.features)
+            result = _predict_paysim(request.features)
         elif dataset_type == "baf":
-            return _predict_baf(request.features)
+            result = _predict_baf(request.features)
         elif dataset_type == "ieee":
-            return _predict_ieee(request.features)
+            result = _predict_ieee(request.features)
+        else:
+            raise HTTPException(status_code=400, detail=f"Unsupported dataset type '{dataset_type}'")
+        
+        #Generate natural language explanation using LLM
+        expl = generate_explanation(
+            fraud_probability=result.fraud_probability,
+            risk_factors=result.risk_factors,
+            decision=result.decision,
+            dataset=effective_type,
+            feature_values=request.features,
+        )
+
+        # Attach explanation to response
+        result.explanation = expl["explanation"]
+        result.explanation_method = expl["method"]
+        
+        return result
+        
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

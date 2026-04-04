@@ -121,10 +121,11 @@ def call_api(dataset_key: str, features: dict) -> dict:
         r = requests.post(
             f"{API_BASE}/predict/{dataset_key}",
             json    = {"features": features},
-            timeout = 5,
+            timeout = 10,
         )
         return r.json() if r.status_code == 200 else None
-    except Exception:
+    except Exception as e:
+        print(f"[API Error] {e}")
         return None
 
 
@@ -174,6 +175,16 @@ with st.sidebar:
     st.divider()
     st.caption(f"API: `{API_BASE}`")
     st.caption(f"Model: {cfg['key'].upper()}-LightGBM")
+    
+    # Toggle for explanation detail level
+    st.subheader("⚙️ Display Options")
+    show_explanations = st.checkbox("Show explanations", value=True)
+    explanation_detail = st.radio(
+        "Explanation detail",
+        ["Brief", "Detailed"],
+        index=0,
+        horizontal=True,
+    )
 
 # ---------------------------------------------------------------------------
 # Main layout
@@ -282,6 +293,8 @@ if st.session_state.running:
             "risk"      : result["risk_level"],
             "factors"   : result["risk_factors"],
             "true_label": true_label,
+            "explanation": result.get("explanation", ""),
+            "explanation_method": result.get("explanation_method", "template")
         })
 
         # --- Update stream panel ---
@@ -300,6 +313,30 @@ if st.session_state.running:
                 if r["factors"]:
                     for f in r["factors"]:
                         st.caption(f"  → {f}")
+                        
+                # <-- NEW: Explanation expandable box
+                if show_explanations and r.get("explanation"):
+                    with st.expander("🔍 Why this decision?", expanded=False):
+                        # Badge showing explanation source
+                        method_badge = "🤖 LLM" if r["explanation_method"] == "llm" else "⚙️ Template"
+                        badge_color = "violet" if r["explanation_method"] == "llm" else "gray"
+                        st.markdown(f":{badge_color}[{method_badge}]")
+                        
+                        # Explanation text
+                        st.markdown(f"""
+                                <div class="explanation-box">
+                                {r["explanation"]}
+                                </div>
+                                """, unsafe_allow_html=True)
+                        
+                        # Show raw risk factors for transparency
+                        with st.popover("📋 View underlying risk factors"):
+                            if r["factors"]:
+                                for f in r["factors"]:
+                                    st.caption(f"• {f}")
+                            else:
+                                st.caption("No specific risk factors detected")
+                                
                 st.markdown("---")
 
         # --- Update alert log (block + review only) ---
@@ -310,11 +347,19 @@ if st.session_state.running:
             for r in alerts[:10]:
                 css_class = f"alert-{r['decision']}"
                 factors_html = "".join(f"<li>{f}</li>" for f in r["factors"])
+                
+                exp_preview = ""
+                if show_explanations and r.get("explanation"):
+                    # Truncate explanation for compact display
+                    exp_text = r["explanation"][:120] + ("..." if len(r["explanation"]) > 120 else "")
+                    exp_preview = f'<br><small><i>💡 {exp_text}</i></small>'
+                    
                 st.markdown(f"""
 <div class="{css_class}">
   <b>{DECISION_ICONS[r['decision']]} Txn #{r['idx']} — {r['decision'].upper()}</b>
   &nbsp; Score: <b>{r['prob']:.3f}</b><br>
   <ul style="margin:4px 0 0 0; font-size:0.85em">{factors_html}</ul>
+  {exp_preview}
 </div>
 """, unsafe_allow_html=True)
 
@@ -355,3 +400,13 @@ else:
         c3.metric("Fraud recall",
                   f"{st.session_state.caught_frauds}/{st.session_state.true_frauds}"
                   if st.session_state.true_frauds else "—")
+        
+        # Show example explanation from last run
+        if show_explanations and st.session_state.results:
+            st.divider()
+            st.subheader("💡 Example Explanation")
+            last = st.session_state.results[0]
+            if last.get("explanation"):
+                method = "🤖 LLM" if last["explanation_method"] == "llm" else "⚙️ Template"
+                st.markdown(f"**{method}** — Txn #{last['idx']} ({last['decision'].upper()})")
+                st.markdown(f"> *{last['explanation']}*")
