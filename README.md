@@ -21,12 +21,14 @@ The project currently supports:
 
 ```text
 fraud_pipeline/
-├── adapters/     # Dataset adapters and feature mapping logic
-├── api/          # FastAPI app exposing prediction endpoints
-├── core/         # Shared preprocessing, decision, evaluation, and feature-role logic
-├── frontend/     # Streamlit demo app and sample CSV data
-├── models/       # Serialized model and preprocessing artifacts
-└── experiments/  # Reserved space for experiments
+├── backend/
+│   ├── adapters/     # Dataset adapters and feature mapping logic
+│   ├── api/          # FastAPI app exposing prediction endpoints
+│   ├── core/         # Shared preprocessing, decision, and role logic
+│   └── models/        # Model artifacts (renamed to .joblib)
+├── frontend/         # Streamlit demo app and sample CSV data
+├── notebooks/        # Data science pipelines and research
+└── requirements.txt  # Project dependencies
 ```
 
 ## How It Works
@@ -49,7 +51,7 @@ For the FinBank demo dataset, the system maps unfamiliar column names into share
 From the repository root:
 
 ```bash
-uvicorn api.main:app --reload
+uvicorn backend.api.main:app --reload
 ```
 
 The API is designed to expose endpoints such as:
