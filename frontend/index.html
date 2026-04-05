@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fraud Detection Dashboard</title>
+  <meta name="description" content="Real-time fraud detection dashboard with ML-powered risk scoring, SHAP explanations, and LLM-generated insights." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #151b2f;
+      --text: #e9ecf7;
+      --muted: #a7b0d1;
+      --line: #2d3a66;
+      --ok: #2cd39a;
+      --danger: #ff5b7a;
+      --accent: #6f8bff;
+      --warn: #f5c34f;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: radial-gradient(ellipse at top, #151d3a 0%, #0b1020 55%);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 1400px; margin: 0 auto; }
+
+    /* Header */
+    .header {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px; margin-bottom: 16px;
+    }
+    .header h1 { font-size: 24px; font-weight: 800; }
+    .header h1 span { color: var(--accent); }
+
+    /* Cards */
+    .card {
+      background: rgba(21,27,47,.92);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 16px;
+      backdrop-filter: blur(8px);
+    }
+    .card h3 { font-size: 16px; margin-bottom: 10px; }
+
+    /* Controls */
+    .controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    select, button {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #0f1630;
+      color: var(--text);
+      padding: 10px 16px;
+      font-size: 14px;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    select:hover, button:hover { border-color: var(--accent); }
+    .primary { background: linear-gradient(135deg, #5b84ff, #7a65ff); border: none; font-weight: 700; }
+    .primary:hover { opacity: 0.9; }
+    .primary:disabled { opacity: 0.5; cursor: not-allowed; }
+    .live-btn { background: linear-gradient(135deg, #2cd39a, #1fa87a); border: none; font-weight: 700; color: #0b1020; }
+    .live-btn.active {
+      background: linear-gradient(135deg, #ff5b7a, #e03050); color: #fff;
+      animation: pulse-glow 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 5px rgba(255,91,122,0.3); }
+      50% { box-shadow: 0 0 18px rgba(255,91,122,0.6); }
+    }
+
+    /* Live dot */
+    .live-dot {
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--ok); display: inline-block;
+      margin-right: 8px; animation: blink 1s ease-in-out infinite;
+    }
+    .live-dot.off { background: var(--muted); animation: none; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    /* KPI strip */
+    .kpi-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px; margin-bottom: 20px;
+    }
+    .kpi {
+      background: rgba(15,22,48,.8);
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .kpi:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .kpi.active-filter { background: rgba(111,139,255,.15); border-color: var(--accent); }
+    .kpi .value { font-size: 32px; font-weight: 800; transition: all 0.3s; }
+    .kpi .label { font-size: 13px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+
+    /* Single Table */
+    .table-wrap { overflow-x: auto; max-height: 480px; overflow-y: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(45,58,102,.5);
+      text-align: left;
+      white-space: nowrap;
+    }
+    th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; position: sticky; top: 0; background: rgba(21,27,47,.98); z-index: 1; }
+    tr { cursor: pointer; transition: background 0.15s; }
+    tr:hover { background: rgba(111,139,255,.06); }
+    tr.selected { background: rgba(111,139,255,.12); }
+
+    /* New item animation */
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-20px); background: rgba(111,139,255,.15); }
+      to   { opacity: 1; transform: translateX(0);     background: transparent; }
+    }
+    tr.new-row { animation: slideIn 0.5s ease-out; }
+
+    /* Badges */
+    .badge {
+      padding: 4px 12px; border-radius: 999px; font-weight: 700;
+      font-size: 12px; display: inline-block; text-transform: uppercase;
+    }
+    .badge-block  { color: #ff9caf; border: 1px solid var(--danger); background: rgba(255,91,122,.12); }
+    .badge-review { color: #ffd98a; border: 1px solid var(--warn);   background: rgba(245,195,79,.12); }
+    .badge-pass   { color: #8ef0cb; border: 1px solid var(--ok);     background: rgba(44,211,154,.12); }
+    
+    .prob-high { color: #ff9caf; font-weight: 800; }
+    .prob-high { color: #ff9caf; font-weight: 800; }
+    .prob-med  { color: #ffd98a; font-weight: 800; }
+    .prob-low  { color: #8ef0cb; font-weight: 800; }
+    
+    .prob-bar-bg { height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; margin-top: 4px;}
+    .prob-bar-fill { height: 100%; transition: width 0.4s ease, background 0.4s ease; }
+
+    /* Action buttons */
+    .action-group { display: flex; gap: 6px; }
+    .act-btn {
+      padding: 6px 12px; border-radius: 8px; font-size: 12px;
+      font-weight: 700; border: 1px solid; cursor: pointer;
+      transition: all 0.15s;
+    }
+    .act-btn:hover { transform: translateY(-1px); }
+    .btn-approve { color: #8ef0cb; border-color: var(--ok);     background: rgba(44,211,154,.1); }
+    .btn-block   { color: #ff9caf; border-color: var(--danger); background: rgba(255,91,122,.1); }
+    .btn-approve:hover { background: rgba(44,211,154,.25); }
+    .btn-block:hover   { background: rgba(255,91,122,.25); }
+    .status-text { color: var(--muted); font-size: 13px; }
+
+    /* Detail section - two columns */
+    .detail-split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 900px) { .detail-split { grid-template-columns: 1fr; } }
+
+    /* Details Grid */
+    .tx-details-grid {
+      display: grid; grid-template-columns: 140px 1fr; gap: 10px 16px; margin-top: 16px;
+      font-size: 14px;
+    }
+    .detail-label { color: var(--muted); font-weight: 500; }
+    .detail-value { font-weight: 600; color: #fff; }
+
+    /* Explanation box & animation */
+    .explanation-box {
+      margin-top: 12px; padding: 16px; border-radius: 12px;
+      background: rgba(15,22,48,.6); border: 1px solid var(--line);
+      font-size: 15px; line-height: 1.6; min-height: 80px;
+    }
+    
+    .ai-typing {
+      display: inline-block;
+      color: var(--accent);
+      font-weight: 500;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+    
+    .loader-panel { text-align: center; padding: 40px; color: var(--muted); font-size: 15px; }
+
+
+
+    /* Toast */
+    .toast {
+      position: fixed; top: 20px; right: 20px;
+      padding: 14px 24px; border-radius: 12px;
+      font-size: 15px; font-weight: 600;
+      z-index: 100; opacity: 0;
+      transform: translateX(30px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .toast.show { opacity: 1; transform: translateX(0); }
+    .toast-block  { background: rgba(255,91,122,.95); color: white; }
+    .toast-review { background: rgba(245,195,79,.95); color: #1a1a1a; }
+    .toast-pass   { background: rgba(44,211,154,.95); color: #1a1a1a; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="toast" class="toast"></div>
+
+    <!-- Header -->
+    <div class="header">
+      <h1>🛡️ <span>Fraud Detection</span> Dashboard</h1>
+      <div class="controls">
+        <select id="datasetSelect" onchange="if(isStreaming){toggleLiveStream();} toggleLiveStream();">
+          <option value="baf">BAF — Bank Account Fraud</option>
+          <option value="paysim">PaySim — Payment Fraud</option>
+          <option value="finbank">FinBank — New Client ✨</option>
+        </select>
+        <button class="live-btn" id="liveBtn" onclick="toggleLiveStream()">▶ Start Live Monitoring</button>
+      </div>
+    </div>
+
+    <!-- KPI filter strip -->
+    <div class="kpi-strip">
+      <div class="kpi active-filter" onclick="setFilter('all')" id="kpiCard-all">
+        <div class="value" id="kpiTotal">0</div><div class="label">Total Scanned</div>
+      </div>
+      <div class="kpi" onclick="setFilter('block')" id="kpiCard-block">
+        <div class="value" id="kpiBlocked" style="color:var(--danger)">0</div><div class="label">🔴 Blocked</div>
+      </div>
+      <div class="kpi" onclick="setFilter('review')" id="kpiCard-review">
+        <div class="value" id="kpiReview" style="color:var(--warn)">0</div><div class="label">🟡 Flagged</div>
+      </div>
+      <div class="kpi" onclick="setFilter('pass')" id="kpiCard-pass">
+        <div class="value" id="kpiPass" style="color:var(--ok)">0</div><div class="label">🟢 Approved</div>
+      </div>
+    </div>
+
+    <!-- Single Table Panel -->
+    <div class="card">
+      <div class="panel-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <h3 id="tableTitle" style="margin:0;"><span id="liveDot" class="live-dot off"></span> Transactions List</h3>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Risk Confidence</th>
+              <th>Status</th>
+              <th>Top Reason</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <tr><td colspan="5" class="loader-panel">Click Start Live Monitoring to begin.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Detail panels -->
+    <div class="detail-split">
+      <!-- Left: Professional Transaction Details -->
+      <div class="card">
+        <h3>📄 Transaction Details</h3>
+        <p class="muted" style="font-size:13px; margin-bottom: 12px;">Primary identifiers and context for <strong style="color:var(--text)" id="det-txid">—</strong></p>
+        
+        <div style="margin-bottom:16px;">
+          <div style="display:flex; justify-content:space-between; font-size:13px;">
+            <span class="muted">Risk Confidence Level</span>
+            <strong id="det-prob-txt" style="color:#fff">--%</strong>
+          </div>
+          <div class="prob-bar-bg">
+            <div class="prob-bar-fill" id="det-prob-fill" style="width:0%; background:var(--accent)"></div>
+          </div>
+        </div>
+        
+        <div class="tx-details-grid">
+          <div class="detail-label">From:</div>
+          <div class="detail-value" id="det-from">—</div>
+          
+          <div class="detail-label">To:</div>
+          <div class="detail-value" id="det-to">—</div>
+          
+          <div class="detail-label">Amount:</div>
+          <div class="detail-value" id="det-amount">—</div>
+          
+          <div class="detail-label">Date:</div>
+          <div class="detail-value" id="det-date">—</div>
+          
+          <div class="detail-label">Location:</div>
+          <div class="detail-value" id="det-location">—</div>
+          
+          <div class="detail-label">Device Used:</div>
+          <div class="detail-value" id="det-device">—</div>
+          
+          <div class="detail-label">Credit Risk Score:</div>
+          <div class="detail-value" id="det-riskscore">—</div>
+        </div>
+      </div>
+
+      <!-- Right: Explanation -->
+      <div class="card">
+        <h3>🧠 AI Explanation</h3>
+        <p class="muted" style="font-size:13px;">Why was this transaction flagged or approved?</p>
+        <div id="explanationBox" class="explanation-box">
+          <p id="explanationText" class="muted">No transaction selected.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // ===== Config =====
+    const API_BASE = "http://localhost:8000";
+    const MAX_ITEMS = 200;
+
+    // ===== State =====
+    let allTransactions = [];
+    let selectedTxId = null;
+    let isStreaming = false;
+    let streamTimer = null;
+    let currentFilter = 'all';
+
+    // ===== DOM =====
+    const tableBody     = document.getElementById("tableBody");
+    const kpiTotal      = document.getElementById("kpiTotal");
+    const kpiBlocked    = document.getElementById("kpiBlocked");
+    const kpiReview     = document.getElementById("kpiReview");
+    const kpiPass       = document.getElementById("kpiPass");
+    const tableTitle    = document.getElementById("tableTitle");
+    const liveDot       = document.getElementById("liveDot");
+    
+    // Details DOM
+    const detTxId       = document.getElementById("det-txid");
+    const detFrom       = document.getElementById("det-from");
+    const detTo         = document.getElementById("det-to");
+    const detAmount     = document.getElementById("det-amount");
+    const detDate       = document.getElementById("det-date");
+    const detLocation   = document.getElementById("det-location");
+    const detDevice     = document.getElementById("det-device");
+    const detRiskScore  = document.getElementById("det-riskscore");
+    const detProbTxt    = document.getElementById("det-prob-txt");
+    const detProbFill   = document.getElementById("det-prob-fill");
+    const explanationText = document.getElementById("explanationText");
+    const explanationBox = document.getElementById("explanationBox");
+
+    const liveBtn       = document.getElementById("liveBtn");
+    const toastEl       = document.getElementById("toast");
+
+    // ===== Toast =====
+    let toastTimeout = null;
+    function showToast(msg, type) {
+      toastEl.textContent = msg;
+      toastEl.className = `toast toast-${type} show`;
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => toastEl.classList.remove("show"), 3000);
+    }
+
+    // ===== Filter Logic =====
+    function setFilter(filterType) {
+      currentFilter = filterType;
+      
+      // Update UI tabs
+      document.querySelectorAll('.kpi').forEach(k => k.classList.remove('active-filter'));
+      document.getElementById(`kpiCard-${filterType}`).classList.add('active-filter');
+      
+      renderTable();
+    }
+
+    // ===== Formatter Helpers =====
+    function formatMoney(amount) {
+      if (amount == null || isNaN(amount)) return "—";
+      return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
+    }
+
+    // Extract generalized fields from disparate dataset formats
+    function extractDetails(tx) {
+      const feats = tx.features || {};
+      const d = tx.dataset?.toLowerCase() || '';
+
+      let from = "—", to = "—", amt = "—", loc = "—", device = "—", risk = "—";
+      
+      if (d.includes('paysim')) {
+        from = feats.nameOrig || "—";
+        to = feats.nameDest || "—";
+        amt = feats.amount || 0;
+        loc = "Domestic";
+        device = "Mobile App"; // Paysim doesn't have device info
+        risk = "—";
+      } else if (d.includes('baf') || d.includes('finbank')) {
+        // BAF uses anonymized numeric/categorical features. Will display meaningful representations.
+        from = `Customer (Age ~${feats.customer_age || feats.customer_age_group || 'N/A'})`;
+        to = "Retail Merchant"; // Assuming standard bank txns
+        amt = feats.intended_balcon_amount || feats.proposed_credit_limit || feats.credit_limit_requested || 0;
+        
+        // Negative amount handling in BAF (sometimes standardized)
+        if (amt < 0) amt = Math.abs(amt) * 1000; 
+
+        loc = (feats.foreign_request === 1 || feats.overseas_ip === 1) ? "Overseas" : "Domestic";
+        device = feats.device_os || feats.applicant_device || "Unknown";
+        risk = feats.credit_risk_score || feats.risk_score || "N/A";
+      }
+      
+      return { 
+        from, to, amount: formatMoney(amt), 
+        location: loc, device, riskScore: risk,
+        date: new Date().toLocaleString() // Live current date for simulation realism
+      };
+    }
+
+    // ===== Transaction Row HTML =====
+    function buildRowHTML(tx, isNew) {
+      const prob = tx.fraud_probability ?? 0;
+      const probPct = (prob * 100).toFixed(1);
+      const probClass = prob >= 0.7 ? "prob-high" : prob >= 0.4 ? "prob-med" : "prob-low";
+      const decision = tx.decision || "pass";
+      const badgeClass = decision === "block" ? "badge-block" : decision === "review" ? "badge-review" : "badge-pass";
+      const topReason = (tx.risk_factors && tx.risk_factors[0]) || "Low risk";
+      const isSelected = tx.id === selectedTxId;
+
+      let actionHtml = '';
+      if (decision === 'pass') {
+        actionHtml = `<span class="status-text">Approved</span>`;
+      } else if (decision === 'block') {
+        actionHtml = `
+          <div class="action-group">
+            <button class="act-btn btn-approve" onclick="event.stopPropagation(); setAction('${tx.id}','approve')">✓ Override & Approve</button>
+          </div>
+        `;
+      } else if (decision === 'review') {
+        actionHtml = `
+          <div class="action-group">
+            <button class="act-btn btn-approve" onclick="event.stopPropagation(); setAction('${tx.id}','approve')">✓ Approve</button>
+            <button class="act-btn btn-block" onclick="event.stopPropagation(); setAction('${tx.id}','block')">✕ Block</button>
+          </div>
+        `;
+      }
+
+      return `
+        <tr class="${isNew ? 'new-row' : ''} ${isSelected ? 'selected' : ''}" 
+            id="row-${tx.id}" onclick="selectTransaction('${tx.id}')">
+          <td style="font-weight:700;">${tx.id}</td>
+          <td class="${probClass}">${probPct}%</td>
+          <td><span class="badge ${badgeClass}">${decision}</span></td>
+          <td style="color:var(--muted); font-size: 13px;">${topReason}</td>
+          <td>${actionHtml}</td>
+        </tr>`;
+    }
+
+    // ===== Render Table =====
+    function renderTable() {
+      let filtered = allTransactions;
+      if (currentFilter !== 'all') {
+        filtered = allTransactions.filter(t => t.decision === currentFilter);
+      }
+
+      if (filtered.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="5" class="loader-panel">No transactions in this view.</td></tr>`;
+        return;
+      }
+      
+      tableBody.innerHTML = filtered.map(t => buildRowHTML(t, false)).join("");
+    }
+
+    // ===== Update KPIs =====
+    function updateKPIs() {
+      const blocked  = allTransactions.filter(t => t.decision === "block").length;
+      const reviewed = allTransactions.filter(t => t.decision === "review").length;
+      const passed   = allTransactions.filter(t => t.decision === "pass").length;
+
+      kpiTotal.textContent   = allTransactions.length;
+      kpiBlocked.textContent = blocked;
+      kpiReview.textContent  = reviewed;
+      kpiPass.textContent    = passed;
+    }
+
+    // ===== Select Transaction =====
+    function selectTransaction(txId) {
+      selectedTxId = txId;
+      const tx = allTransactions.find(t => t.id === txId);
+      if (!tx) return;
+
+      // Highlight selected row
+      document.querySelectorAll("#tableBody tr").forEach(el => el.classList.remove("selected"));
+      const el = document.getElementById(`row-${txId}`);
+      if (el) el.classList.add("selected");
+
+      // Details mapping
+      const details = extractDetails(tx);
+      detTxId.textContent = tx.id;
+      detFrom.textContent = details.from;
+      detTo.textContent = details.to;
+      detAmount.textContent = details.amount;
+      detDate.textContent = details.date;
+      detLocation.textContent = details.location;
+      detDevice.textContent = details.device;
+      detRiskScore.textContent = details.riskScore;
+
+      // Update Probability Bar
+      const probPct = ((tx.fraud_probability || 0) * 100).toFixed(1);
+      detProbTxt.textContent = `${probPct}%`;
+      detProbFill.style.width = `${probPct}%`;
+      detProbFill.style.background = tx.fraud_probability >= 0.7 ? "var(--danger)" : tx.fraud_probability >= 0.4 ? "var(--warn)" : "var(--ok)";
+      detProbTxt.style.color = detProbFill.style.background;
+
+      // AI Explanation (On-Demand & Cached)
+      if (tx.explanation_cached) {
+        explanationText.textContent = tx.explanation_cached;
+        explanationText.style.color = "var(--text)";
+      } else {
+        explanationText.innerHTML = '<span class="ai-typing">🧠 Processing AI risk insights...</span>';
+        
+        fetch(`${API_BASE}/explain_transaction`, {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({
+            fraud_probability: tx.fraud_probability,
+            risk_factors: tx.risk_factors || [],
+            decision: tx.decision,
+            dataset: tx.dataset,
+            features: tx.features || {}
+          })
+        }).then(res => res.json()).then(data => {
+          // Cache it for subsequent clicks
+          if (data && data.explanation) {
+             tx.explanation_cached = data.explanation;
+          } else {
+             tx.explanation_cached = "Explanation not available.";
+          }
+          
+          // Only render if user is still on the same row!
+          if (selectedTxId === txId) {
+             explanationText.textContent = tx.explanation_cached;
+             explanationText.style.color = "var(--text)";
+          }
+        }).catch(err => {
+          if (selectedTxId === txId) {
+             explanationText.textContent = "AI insight failed to load. " + err;
+             explanationText.style.color = "var(--danger)";
+          }
+          tx.explanation_cached = "AI insight failed to load.";
+        });
+      }
+    }
+
+    // ===== Action Buttons =====
+    function setAction(txId, action) {
+      const tx = allTransactions.find(t => t.id === txId);
+      if (!tx) return;
+
+      if (action === "approve") {
+        tx.decision = "pass";
+        showToast(`✅ APPROVED: ${tx.id}`, "pass");
+      }
+      else if (action === "block") {
+        tx.decision = "block";
+        showToast(`🚨 BLOCKED: ${tx.id}`, "block");
+      }
+
+      updateKPIs();
+      renderTable();
+      if (txId === selectedTxId) selectTransaction(txId);
+    }
+
+    // ===== Batch Scan =====
+    async function scanDataset() {
+      if (isStreaming) toggleLiveStream();
+      const dataset = document.getElementById("datasetSelect").value;
+      tableBody.innerHTML = '<tr><td colspan="5" class="loader-panel">Scanning pipeline...</td></tr>';
+      
+      // Reset filter to view all scan results
+      setFilter('all');
+
+      try {
+        const res = await fetch(`${API_BASE}/scan/${dataset}`, { method: "POST" });
+        if (!res.ok) throw new Error(`API returned ${res.status}`);
+        const data = await res.json();
+        allTransactions = data.transactions || [];
+        updateKPIs();
+        renderTable();
+        if (allTransactions.length > 0) selectTransaction(allTransactions[0].id);
+      } catch (err) {
+        console.error(err);
+        tableBody.innerHTML = `<tr><td colspan="5" class="loader-panel" style="color:var(--danger)">❌ Failed to connect to backend.</td></tr>`;
+      }
+    }
+
+    // ===== Live Stream =====
+    function toggleLiveStream() {
+      if (isStreaming) {
+        isStreaming = false;
+        clearTimeout(streamTimer);
+        liveBtn.textContent = "▶ Start Live Monitoring";
+        liveBtn.classList.remove("active");
+        liveDot.classList.add("off");
+      } else {
+        isStreaming = true;
+        allTransactions = [];
+        updateKPIs();
+        setFilter('all');
+        tableBody.innerHTML = '<tr><td colspan="5" class="loader-panel">Waiting for transactions...</td></tr>';
+        
+        liveBtn.textContent = "⏹ Stop";
+        liveBtn.classList.add("active");
+        liveDot.classList.remove("off");
+        
+        fetchNextTransaction();
+      }
+    }
+
+    function scheduleNextFetch() {
+      const delay = 2500;
+      const jitter = delay * (0.7 + Math.random() * 0.6);
+      streamTimer = setTimeout(fetchNextTransaction, jitter);
+    }
+
+    async function fetchNextTransaction() {
+      if (!isStreaming) return;
+      const dataset = document.getElementById("datasetSelect").value;
+
+      try {
+        const res = await fetch(`${API_BASE}/stream/next/${dataset}`);
+        if (!res.ok) throw new Error(`API returned ${res.status}`);
+        const tx = await res.json();
+
+        allTransactions.unshift(tx);
+        if (allTransactions.length > MAX_ITEMS) {
+          allTransactions = allTransactions.slice(0, MAX_ITEMS);
+        }
+
+        updateKPIs();
+        
+        // Only insert visually if we are in 'all' view or the matching state view
+        if (currentFilter === 'all' || currentFilter === tx.decision) {
+          // Remove empty state
+          const empty = tableBody.querySelector(".loader-panel");
+          if (empty) empty.closest('tr').remove();
+          
+          tableBody.insertAdjacentHTML("afterbegin", buildRowHTML(tx, true));
+          
+          const rows = tableBody.querySelectorAll("tr");
+          if (rows.length > MAX_ITEMS) {
+            tableBody.removeChild(rows[rows.length - 1]);
+          }
+        }
+
+        // Auto-select first or high risk
+        if (allTransactions.length === 1 || tx.decision === "block") {
+          selectTransaction(tx.id);
+        }
+
+        // Toasts
+        if (tx.decision === "block") {
+          showToast(`🚨 BLOCKED: ${tx.id} — ${(tx.fraud_probability * 100).toFixed(0)}% fraud risk`, "block");
+        } else if (tx.decision === "review") {
+          showToast(`⚠️ FLAGGED: ${tx.id} — Needs review`, "review");
+        }
+      } catch (err) {
+        console.error("Stream error:", err);
+      }
+
+      if (isStreaming) scheduleNextFetch();
+    }
+    
+    // Initial fetch to populate if needed
+    window.onload = () => {
+      // scanDataset(); // uncomment to auto-scan on load
+    }
+  </script>
+</body>
+</html>

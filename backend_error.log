@@ -1,0 +1,611 @@
+INFO:     Started server process [8532]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+All models loaded successfully.
+  paysim: ['model', 'scaler', 'artifacts', 'explainer']
+  baf: ['models', 'encoder', 'artifacts', 'explainers']
+  ieee: ['models', 'label_encoders', 'drop_cols', 'artifacts', 'explainers']
+INFO:     127.0.0.1:53386 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53399 - "GET /stream/next/baf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53399 - "OPTIONS /explain_transaction HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53399 - "POST /explain_transaction HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53399 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53399 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53470 - "GET /stream/next/baf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53470 - "POST /explain_transaction HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53470 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53470 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53470 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53512 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53512 - "POST /explain_transaction HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53525 - "POST /explain_transaction HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/sklearn/utils/validation.py:2691: UserWarning: X does not have valid feature names, but LGBMClassifier was fitted with feature names
+  warnings.warn(
+/Users/zhengwei/Downloads/nus/Y3S2/is4228/is4228-project---fraud-detection/.venv/lib/python3.13/site-packages/shap/explainers/_tree.py:620: UserWarning: LightGBM binary classifier with TreeExplainer shap values output has changed to a list of ndarray
+  warnings.warn(
+INFO:     127.0.0.1:53516 - "GET /stream/next/baf HTTP/1.1" 200 OK

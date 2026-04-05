@@ -10,27 +10,24 @@ Supports:
 import os
 import json
 from typing import Optional
-from groq import Groq
-#from decision import RISK_FACTOR_LABELS, GENERIC_LABEL
 from openai import OpenAI
 
 LLM_ENABLED = os.getenv("ENABLE_LLM_EXPLANATIONS", "true").lower() == "true"
-LLM_MODEL = os.getenv("LLM_MODEL", "llama-3.3-70b-versatile")
+LLM_MODEL = os.getenv("LLM_MODEL", "gpt-4o")
 LLM_API_KEY = os.getenv("LLM_API_KEY", "")
-LLM_BASE_URL = os.getenv("LLM_BASE_URL", None)
 
 
 SYSTEM_PROMPT = """
-You are a fraud analysis assistant for a financial security system. 
-Your task is to explain why a transaction was scored as potentially fraudulent or legitimate.
+You are a senior risk intelligence advisor for a global payment platform.
+Your task is to explain the rationale behind a transaction's risk decision (Approve, Review, or Block) directly to the payment platform owners and risk management teams.
 
 Guidelines:
-- Be concise (2-4 sentences max).
-- Use plain, non-technical language suitable for a fraud analyst or customer support agent.
-- Reference the specific risk factors provided, but translate them into business context.
-- If the fraud probability is low, explain why the transaction appears legitimate.
-- Never reveal model internals, SHAP values, or thresholds.
-- If uncertain, acknowledge limitations rather than speculating.
+- Be concise, professional, and action-oriented (2-4 sentences max).
+- Frame the explanation around business impact, security posture, and actionable insights.
+- Provide a clear, decision-driven narrative: Why did our system take this action? What is the specific business risk?
+- If blocked or reviewed, highlight the specific anomalies in a way that helps owners understand emerging fraud attack vectors.
+- If approved, reassure them about the normalcy of the pattern in relation to standard customer behavior.
+- Do not mention the terms "model", "SHAP", "machine learning", or related internal jargon. Speak purely in terms of payment integrity and user behavior.
 
 Output format: Return ONLY the explanation text. No JSON, no markdown, no prefixes.
 """
@@ -77,7 +74,6 @@ def _call_llm_api(
     system_prompt: str = SYSTEM_PROMPT,
     model: str = LLM_MODEL,
     api_key: str = LLM_API_KEY,
-    base_url: Optional[str] = LLM_BASE_URL,
     max_tokens: int = 150,
     temperature: float = 0.1,
 ) -> Optional[str]:
@@ -85,11 +81,12 @@ def _call_llm_api(
     Call OpenAI-compatible API to generate explanation.
     Returns cleaned response text or None on error.
     """
-    if not api_key:
-        return None
+    if not api_key or api_key == "YOUR_OPENAI_API_KEY":
+        raise ValueError("LLM_API_KEY is not set or is empty. Cannot generate LLM insights.")
 
     try:
-        client = OpenAI(api_key=api_key, base_url=base_url)
+        # Standard OpenAI Initialization
+        client = OpenAI(api_key=api_key)
         response = client.chat.completions.create(
             model=model,
             messages=[
@@ -105,9 +102,9 @@ def _call_llm_api(
         text = text.replace("```", "").replace("Explanation:", "").strip()
         return text if text else None
     except Exception as e:
-        # Log error in production; here we silently fallback
+        # Instead of silently falling back to a template, we raise the error so the frontend can display it.
         print(f"[LLM Explanation Error] {e}")
-        return None
+        raise ValueError(f"LLM API Error: {str(e)}")
 
 
 def generate_llm_explanation(

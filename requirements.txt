@@ -17,10 +17,6 @@ uvicorn
 pydantic
 python-dotenv
 
-# Frontend (Streamlit)
-streamlit
-requests
-
 # LLM Explanations
 openai
 groq

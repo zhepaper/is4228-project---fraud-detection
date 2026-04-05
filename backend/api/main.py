@@ -14,14 +14,31 @@ Endpoints:
 """
 
 import os
+from dotenv import load_dotenv
+load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
+
 import sys
+import random
 import numpy as np
 import pandas as pd
 import joblib
 import shap
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
-from typing import Any
+from typing import Any, Optional
+
+class PredictRequest(BaseModel):
+    features: dict[str, Any]
+
+class ExplainRequest(BaseModel):
+    fraud_probability: float
+    risk_factors: list[str]
+    decision: str
+    dataset: str
+    features: dict[str, Any]
 
 # Add project root to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
@@ -45,6 +62,20 @@ app = FastAPI(
     description="Multi-dataset fraud detection pipeline: PaySim | BAF | IEEE-CIS",
     version="1.0.0",
 )
+
+# Allow the HTML frontend to connect from any origin
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Serve the frontend folder as static files
+FRONTEND_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'frontend')
+if os.path.isdir(FRONTEND_DIR):
+    app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
 
 # Global model store — loaded once at startup, reused for every request
 MODELS = {}
@@ -375,11 +406,219 @@ def datasets():
         ds: {
             "features"  : MODELS[ds]["artifacts"]["features"],
             "threshold" : float(MODELS[ds]["artifacts"]["threshold"]),
-            "decision_thresholds": DECISION_THRESHOLDS[ds],
         }
         for ds in MODELS
     }
 
+
+@app.get("/")
+def serve_frontend():
+    """Serve the HTML frontend at root."""
+    index_path = os.path.join(FRONTEND_DIR, "index.html")
+    if os.path.exists(index_path):
+        return FileResponse(index_path)
+    return {"message": "Frontend not found. Place index.html in /frontend/"}
+
+
+@app.post("/scan/{dataset_type}")
+def scan_batch(dataset_type: str, limit: int = 45):
+    """
+    Scan the demo CSV for a dataset, score every row through the API pipeline,
+    and return results ranked by fraud probability (highest first).
+    
+    This powers the HTML dashboard's transaction table.
+    """
+    # Map dataset to CSV and label column
+    csv_map = {
+        "paysim":  {"file": "paysim_demo_data.csv",  "label": "isFraud"},
+        "baf":     {"file": "baf_demo_data.csv",     "label": "fraud_bool"},
+        "finbank": {"file": "finbank_demo_data.csv", "label": "fraud_label"},
+    }
+
+    effective_type = "baf" if dataset_type == "finbank" else dataset_type
+    if effective_type not in MODELS:
+        raise HTTPException(status_code=404, detail=f"Unknown dataset '{dataset_type}'")
+
+    cfg = csv_map.get(dataset_type)
+    if not cfg:
+        raise HTTPException(status_code=404, detail=f"No demo CSV for '{dataset_type}'")
+
+    csv_path = os.path.join(FRONTEND_DIR, cfg["file"])
+    if not os.path.exists(csv_path):
+        raise HTTPException(status_code=404, detail=f"CSV not found: {cfg['file']}")
+
+    demo_df = pd.read_csv(csv_path)
+    label_col = cfg["label"]
+    results = []
+
+    for idx, row in demo_df.head(limit).iterrows():
+        features = row.to_dict()
+        true_label = int(features.pop(label_col, 0))
+
+        # Convert numpy types to native Python for JSON
+        features = {
+            k: (float(v) if isinstance(v, (np.floating, np.integer)) else v)
+            for k, v in features.items()
+        }
+
+        try:
+            if dataset_type == "finbank":
+                renamed = finbank_adapter.preprocess(pd.DataFrame([features])).iloc[0].to_dict()
+                pred = _predict_baf(renamed)
+                pred.dataset = "finbank (routed → BAF)"
+            elif dataset_type == "paysim":
+                pred = _predict_paysim(features)
+            elif dataset_type == "baf":
+                pred = _predict_baf(features)
+            else:
+                continue
+
+            # Default template explanation for lightning fast scan rendering
+            expl = generate_explanation(
+                fraud_probability=pred.fraud_probability,
+                risk_factors=pred.risk_factors,
+                decision=pred.decision,
+                dataset=effective_type,
+                feature_values=features,
+                use_llm=False,
+            )
+
+            results.append({
+                "id":             f"TXN-{idx+1:04d}",
+                "index":          idx,
+                "dataset":        pred.dataset,
+                "decision":       pred.decision,
+                "risk_level":     pred.risk_level,
+                "fraud_probability": pred.fraud_probability,
+                "risk_factors":   pred.risk_factors,
+                "model":          pred.model,
+                "true_label":     true_label,
+                "is_dynamic":     pred.is_dynamic,
+                "adjustment_reason": pred.adjustment_reason,
+                "explanation_method": expl["method"],
+                "features":       features,
+            })
+        except Exception as e:
+            results.append({
+                "id":    f"TXN-{idx+1:04d}",
+                "index": idx,
+                "error": str(e),
+            })
+
+    # Sort by fraud probability descending
+    results.sort(key=lambda r: r.get("fraud_probability", 0), reverse=True)
+    return {"dataset": dataset_type, "total": len(results), "transactions": results}
+
+
+# Global counters for stream transactions
+_stream_counters = {}
+
+
+@app.get("/stream/next/{dataset_type}")
+def stream_next(dataset_type: str):
+    """
+    Return ONE sequential transaction from the demo CSV, scored through the ML pipeline.
+    Simulates a real-time transaction arriving at a bank by maintaining chronological order.
+    """
+    csv_map = {
+        "paysim":  {"file": "paysim_demo_data.csv",  "label": "isFraud"},
+        "baf":     {"file": "baf_demo_data.csv",     "label": "fraud_bool"},
+        "finbank": {"file": "finbank_demo_data.csv", "label": "fraud_label"},
+    }
+
+    effective_type = "baf" if dataset_type == "finbank" else dataset_type
+    if effective_type not in MODELS:
+        raise HTTPException(status_code=404, detail=f"Unknown dataset '{dataset_type}'")
+
+    cfg = csv_map.get(dataset_type)
+    if not cfg:
+        raise HTTPException(status_code=404, detail=f"No demo CSV for '{dataset_type}'")
+
+    csv_path = os.path.join(FRONTEND_DIR, cfg["file"])
+    if not os.path.exists(csv_path):
+        raise HTTPException(status_code=404, detail=f"CSV not found: {cfg['file']}")
+
+    demo_df = pd.read_csv(csv_path)
+    label_col = cfg["label"]
+
+    # Ensure dataset is in stream counters
+    if dataset_type not in _stream_counters:
+        _stream_counters[dataset_type] = 0
+
+    # Pick a sequential row instead of random to simulate chronological live transactions properly
+    idx = _stream_counters[dataset_type] % len(demo_df)
+    _stream_counters[dataset_type] += 1
+
+    row = demo_df.iloc[idx]
+    features = row.to_dict()
+    true_label = int(features.pop(label_col, 0))
+
+    # Convert numpy types
+    features = {
+        k: (float(v) if isinstance(v, (np.floating, np.integer)) else v)
+        for k, v in features.items()
+    }
+
+    txn_id = f"TXN-{_stream_counters[dataset_type]:05d}"
+
+    try:
+        if dataset_type == "finbank":
+            renamed = finbank_adapter.preprocess(pd.DataFrame([features])).iloc[0].to_dict()
+            pred = _predict_baf(renamed)
+            pred.dataset = "finbank (routed → BAF)"
+        elif dataset_type == "paysim":
+            pred = _predict_paysim(features)
+        elif dataset_type == "baf":
+            pred = _predict_baf(features)
+        else:
+            raise HTTPException(status_code=400, detail=f"Unsupported dataset type")
+
+        # Generate explanation via LLM/template
+        expl = generate_explanation(
+            fraud_probability=pred.fraud_probability,
+            risk_factors=pred.risk_factors,
+            decision=pred.decision,
+            dataset=effective_type,
+            feature_values=features,
+            use_llm=False
+        )
+
+        return {
+            "id":                txn_id,
+            "index":             idx,
+            "dataset":           pred.dataset,
+            "decision":          pred.decision,
+            "risk_level":        pred.risk_level,
+            "fraud_probability": pred.fraud_probability,
+            "risk_factors":      pred.risk_factors,
+            "model":             pred.model,
+            "true_label":        true_label,
+            "is_dynamic":        pred.is_dynamic,
+            "adjustment_reason": pred.adjustment_reason,
+            "explanation_method": expl["method"],
+            "features":          features,
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/explain_transaction")
+def explain_transaction(req: ExplainRequest):
+    """
+    On-demand API hook to generate an LLM explanation for a specific transaction risk profile.
+    """
+    try:
+        expl = generate_explanation(
+            fraud_probability=req.fraud_probability,
+            risk_factors=req.risk_factors,
+            decision=req.decision,
+            dataset=req.dataset,
+            feature_values=req.features,
+            use_llm=True  # Always force LLM for on-demand fetch
+        )
+        return expl
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/predict/{dataset_type}", response_model=PredictResponse)
 def predict(dataset_type: str, request: PredictRequest):

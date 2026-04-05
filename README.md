@@ -1,21 +1,20 @@
-# Fraud Detection Pipeline
+# Fraud Detection Dashboard
 
-This repository contains a modular fraud detection proof of concept built around multiple transaction datasets and a unified serving layer. It combines dataset-specific preprocessing adapters, pre-trained models, a FastAPI inference service, and a Streamlit demo interface for real-time scoring.
+This repository contains a modular fraud detection proof of concept built around multiple transaction datasets and a unified serving layer. It combines dataset-specific preprocessing adapters, pre-trained models, a FastAPI inference service, and a beautiful HTML/JS dashboard for real-time scoring and AI explanations.
 
 The project currently supports:
-
-- PaySim: synthetic mobile money transaction fraud detection
-- BAF: bank account application fraud detection
-- IEEE-CIS: e-commerce transaction fraud detection
-- FinBank demo: a new client dataset routed into the existing BAF pipeline through feature-role mapping, without retraining
+- **PaySim:** synthetic mobile money transaction fraud detection
+- **BAF:** bank account application fraud detection
+- **IEEE-CIS:** e-commerce transaction fraud detection
+- **FinBank demo:** a new client dataset routed into the existing BAF pipeline through feature-role mapping, without retraining
 
 ## Project Highlights
-
-- Unified prediction API for multiple fraud datasets
-- Dataset-specific preprocessing adapters with shared decision outputs
-- Pre-trained model artifacts included in the repository
-- Streamlit frontend for live transaction simulation and alert monitoring
-- Feature-role mapping design that helps onboard unseen datasets with different column names
+- **Unified Prediction API:** A single backend API processing multiple fraud datasets.
+- **Dataset-Specific Preprocessing Adapters:** Translates diverse datasets into shared decision outputs.
+- **Pre-Trained Model Artifacts:** Included in the repository ready-to-run.
+- **Live Monitoring Dashboard:** Vanilla HTML/JS frontend showing real-time transaction simulation and alerts.
+- **ChatGPT-Powered Risk Insights:** (Optional) LLM integration to generate real-time professional explanations for why a transaction was flagged or approved.
+- **Feature-Role Mapping Design:** Helps onboard unseen datasets with different column names.
 
 ## Repository Structure
 
@@ -24,9 +23,10 @@ fraud_pipeline/
 ├── backend/
 │   ├── adapters/     # Dataset adapters and feature mapping logic
 │   ├── api/          # FastAPI app exposing prediction endpoints
-│   ├── core/         # Shared preprocessing, decision, and role logic
-│   └── models/        # Model artifacts (renamed to .joblib)
-├── frontend/         # Streamlit demo app and sample CSV data
+│   ├── core/         # Shared preprocessing, decision logic, and AI explanations
+│   ├── models/       # Model artifacts (.joblib)
+│   └── .env          # Environment variables and API keys
+├── frontend/         # Dashboard (index.html) and demo CSV data
 ├── notebooks/        # Data science pipelines and research
 └── requirements.txt  # Project dependencies
 ```
@@ -34,98 +34,38 @@ fraud_pipeline/
 ## How It Works
 
 Each dataset has its own preprocessing flow and trained model assets. The API loads all required artifacts at startup and serves predictions through a common response format that includes:
+- Fraud probability
+- Decision (`pass`, `review`, or `block`)
+- Risk level & Risk factors
+- Dataset name & Model type
 
-- fraud probability
-- decision (`pass`, `review`, or `block`)
-- risk level
-- risk factors
-- dataset name
-- model type
+For the **FinBank demo** dataset, the system maps unfamiliar column names into shared semantic roles, and renames them to the schema expected by the BAF pipeline. This demonstrates the main architectural idea of the project: reuse an existing fraud model for a new client dataset when the underlying business meaning of features is aligned.
 
-For standard datasets such as PaySim, BAF, and IEEE-CIS, requests are routed to their corresponding adapters and models.
+## Running the Project
 
-For the FinBank demo dataset, the system maps unfamiliar column names into shared semantic roles and then renames them to the feature schema expected by the BAF pipeline. This demonstrates the main architectural idea of the project: reuse an existing fraud model for a new client dataset when the underlying business meaning of features is aligned.
+### 1. Configure API Keys (Optional but Recommended)
+For AI-generated risk explanations to work on the dashboard, configure your `.env` file inside the `backend/` directory with your OpenAI key:
+```env
+ENABLE_LLM_EXPLANATIONS="true"
+LLM_MODEL="gpt-4o"
+LLM_API_KEY="sk-YOUR_API_KEY"
+```
 
-## Running the API
-
-From the repository root:
-
+### 2. Install Dependencies
+From the repository root, install the required packages:
 ```bash
-uvicorn backend.api.main:app --reload
-```
-
-The API is designed to expose endpoints such as:
-
-- `GET /health`
-- `GET /datasets`
-- `POST /predict/{dataset_type}`
-
-Example dataset types include `paysim`, `baf`, and `ieee`.
-
-## Running the Frontend Demo
-
-In a separate terminal, start the Streamlit application:
-
-```bash
-streamlit run frontend/app.py
-```
-
-The frontend expects the FastAPI backend to be running at `http://localhost:8000`.
-
-The demo includes pre-sampled CSV files for:
-
-- PaySim
-- BAF
-- FinBank
-
-The interface replays transactions, calls the backend API, and shows real-time fraud decisions and alert summaries.
-
-## Main Components
-
-### `api/main.py`
-
-Loads models at startup and exposes a unified inference API.
-
-### `adapters/`
-
-Transforms raw dataset-specific inputs into model-ready features. The `finbank_adapter.py` file demonstrates how a previously unseen dataset can be aligned to the BAF schema.
-
-### `core/feature_roles.py`
-
-Defines the semantic feature-role framework used to compare and align features across datasets. Shared roles include temporal, monetary, and transaction signals, while richer datasets add roles such as identity, velocity, device, and stability.
-
-### `models/`
-
-Contains serialized model files and preprocessing artifacts used directly by the API.
-
-## Notes
-
-- Model artifacts are committed to the repository so the API can run immediately after dependencies are installed.
-- This repository is structured as a working proof of concept rather than a production deployment package.
-- The frontend and API assume a local development workflow.
-
-## Suggested Next Improvements
-
-- Add a `requirements.txt` or `pyproject.toml` for reproducible setup
-- Add example request payloads for each dataset
-- Add unit tests for adapters and API routes
-- Add a short architecture diagram for the end-to-end scoring flow
-
-## HOW TO RUN
-
-Install dependencies
-
-```
 pip install -r requirements.txt
 ```
 
-Open 2 Terminals
-(One for frontend, One for backend)
+### 3. Start the Server
+The FastAPI application serves both the API endpoints and the frontend dashboard automatically. Start the server using Uvicorn:
 
-```
-uvicorn backend.api.main:app --reload --port 8000
+```bash
+uvicorn backend.api.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-```
-streamlit run frontend/app.py
-```
+### 4. Visit the Application
+Open your browser and navigate to:
+[http://localhost:8000](http://localhost:8000)
+
+The demo includes pre-sampled CSV files for *PaySim, BAF, and FinBank*. The beautiful dashboard replays streaming transactions, scores them sequentially through the backend API, and displays real-time fraud decisions alongside LLM-generated explanations whenever you click on a transaction.
