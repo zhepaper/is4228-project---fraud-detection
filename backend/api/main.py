@@ -514,6 +514,13 @@ def scan_batch(dataset_type: str, limit: int = 45):
 _stream_counters = {}
 
 
+@app.post("/stream/reset/{dataset_type}")
+def reset_stream(dataset_type: str):
+    """Reset the stream counter for a specific dataset."""
+    _stream_counters[dataset_type] = 0
+    return {"status": "reset", "dataset": dataset_type, "counter": 0}
+
+
 @app.get("/stream/next/{dataset_type}")
 def stream_next(dataset_type: str):
     """
