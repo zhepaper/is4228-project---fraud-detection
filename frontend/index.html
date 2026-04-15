@@ -298,8 +298,8 @@
           <div class="detail-label">Device Used:</div>
           <div class="detail-value" id="det-device">—</div>
           
-          <div class="detail-label">Credit Risk Score:</div>
-          <div class="detail-value" id="det-riskscore">—</div>
+          <div class="detail-label">Top Risk Factors:</div>
+          <div class="detail-value" id="det-riskfactors" style="white-space:normal; line-height:1.5;">—</div>
         </div>
       </div>
 
@@ -345,7 +345,7 @@
     const detDate       = document.getElementById("det-date");
     const detLocation   = document.getElementById("det-location");
     const detDevice     = document.getElementById("det-device");
-    const detRiskScore  = document.getElementById("det-riskscore");
+    const detRiskFactors = document.getElementById("det-riskfactors");
     const detProbTxt    = document.getElementById("det-prob-txt");
     const detProbFill   = document.getElementById("det-prob-fill");
     const explanationText = document.getElementById("explanationText");
@@ -504,7 +504,11 @@
       detDate.textContent = details.date;
       detLocation.textContent = details.location;
       detDevice.textContent = details.device;
-      detRiskScore.textContent = details.riskScore;
+      // Show top 3 risk factors from SHAP analysis
+      const topFactors = (tx.risk_factors || []).slice(0, 3);
+      detRiskFactors.innerHTML = topFactors.length
+        ? topFactors.map((f, i) => `<span style="display:block;"><span style="color:var(--warn); font-size:11px; margin-right:4px;">${i+1}.</span>${f}</span>`).join('')
+        : '<span style="color:var(--muted)">No risk factors identified</span>';
 
       // Update Probability Bar
       const probPct = ((tx.fraud_probability || 0) * 100).toFixed(1);
@@ -626,7 +630,7 @@
       document.getElementById("det-date").textContent = "—";
       document.getElementById("det-location").textContent = "—";
       document.getElementById("det-device").textContent = "—";
-      document.getElementById("det-riskscore").textContent = "—";
+      document.getElementById("det-riskfactors").textContent = "—";
       document.getElementById("det-prob-txt").textContent = "--%";
       document.getElementById("det-prob-fill").style.width = "0%";
       document.getElementById("explanationText").textContent = "No transaction selected.";

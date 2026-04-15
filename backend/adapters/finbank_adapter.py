@@ -114,6 +114,9 @@ def preprocess(df: pd.DataFrame) -> pd.DataFrame:
     # Drop label column if present
     df = df.drop(columns=['fraud_label'], errors='ignore')
 
+    # No inversion needed for FinBank risk_score as both datasets use 'Higher = Riskier' semantics.
+    # The BAF model expects credit_risk_score where higher values increase fraud probability.
+
     # Rename columns using the feature role mapping
     df = df.rename(columns=COLUMN_MAP)
 
